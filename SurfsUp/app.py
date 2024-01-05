@@ -92,7 +92,7 @@ def temp():
 
 # Return a JSON list of the minimum, average and maximum temperature for a specified start or start-end range
 @app.route("/api/v1.0/<start>")
-def summary_temp():
+def summary_temp(start):
     results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).\
     filter(measurement.date >= start).all()
 
@@ -108,7 +108,7 @@ def summary_temp():
 
 
 @app.route("/api/v1.0/<start>/<end>")
-def summary_temp_range():
+def summary_temp_range(start,end):
     results = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).\
     filter(measurement.date >= start).\
     filter(measurement.date <= end).all()
